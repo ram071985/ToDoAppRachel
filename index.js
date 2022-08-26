@@ -1,3 +1,8 @@
-//function();
+function click()
+{
+  console.log("click");
 
-//button.addEventListener("click", );
+}
+
+const button = document.getElementById("button");
+button.addEventListener("click", click);
