@@ -13,13 +13,15 @@
       <h1 class="title">To-Do List</h1>
     </div>
 
-    <form>
-      <div class="textEntry">
-        <input id="enter to-do" type="text" />
-        <button id="button" type="submit">Add</button>
+    <div class="main-container">
+      <form id="toDoEntry">
+        <input type="text" />
+        <input type="submit" id="submit" value="Add" />
+      </form>
+      <div class="to-do-items">
+        <ul id="todo-list"></ul>
       </div>
-    </form>
-
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
