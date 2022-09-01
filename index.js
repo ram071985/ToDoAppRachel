@@ -4,13 +4,16 @@ form.elements[1].addEventListener("click", function(click) {
    click.preventDefault();
     let ulList = document.getElementById("todo-list");
 
-    let li = createListInDOM(form.elements[0].value);
+    let li = createListItem(form.elements[0].value);
     ulList.appendChild(li); 
+
+    form.elements[0].value = "";
+    
 });
 
-function createListInDOM(text) {
+function createListItem(text) {
   // create list element for unorder list
-  const list = document.createElement("li");
+  let list = document.createElement("li");
   //create text to add to list item
   const textNode = document.createTextNode(text);
   // add the text to the new list item
