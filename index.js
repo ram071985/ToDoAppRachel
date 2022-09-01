@@ -18,6 +18,24 @@ function createListItem(text) {
   const textNode = document.createTextNode(text);
   // add the text to the new list item
   list.appendChild(textNode);
+  // get delete button
+  let deleteButton = deleteListItem(list);
+  // add delete button to list item
+  list.appendChild(deleteButton);
 // return the new list item to the event listener to add to the unordered list
   return list;
+
+function deleteListItem(list) {
+  let deleteButton = document.createElement("button");
+
+  let textNode = document.createTextNode("X");
+
+  deleteButton.appendChild(document.createTextNode("X"));
+
+  deleteButton.addEventListener("click", function() {
+    list.remove()
+  })
+
+  return deleteButton;
+  }
 }
