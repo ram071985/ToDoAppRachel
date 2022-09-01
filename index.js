@@ -1,39 +1,20 @@
-const todos = [];
+const form = document.getElementById("toDoEntry");
 
-submit.addEventListener("click", function(click) {
+form.elements[1].addEventListener("click", function(click) {
    click.preventDefault();
     let ulList = document.getElementById("todo-list");
 
-    let li = createListInDOM(click.target.value);
-    ulList.appendChild(li);
-
-    console.log("Click Test: ", ulList);
-  
+    let li = createListInDOM(form.elements[0].value);
+    ulList.appendChild(li); 
 });
 
 function createListInDOM(text) {
+  // create list element for unorder list
   const list = document.createElement("li");
+  //create text to add to list item
   const textNode = document.createTextNode(text);
+  // add the text to the new list item
   list.appendChild(textNode);
-
+// return the new list item to the event listener to add to the unordered list
   return list;
 }
-
-function click()
-{ 
-  window.event.preventDefault();
-
-  todos.push("Hello there");
-
-  
-  console.log("To Do Array: ", todos);
-}
-
-
-
-
-
-
-
-//let x = document.toDoEntry.elements[0].text;
-//console.log(x);
