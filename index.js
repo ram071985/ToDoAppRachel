@@ -1,5 +1,9 @@
 const form = document.getElementById("toDoEntry");
 
+let toDoItems = [];
+
+getStorageItems();
+
 form.elements[1].addEventListener("click", function(click) {
    click.preventDefault();
     let ulList = document.getElementById("todo-list");
@@ -7,12 +11,21 @@ form.elements[1].addEventListener("click", function(click) {
     let li = createListItem(form.elements[0].value);
     ulList.appendChild(li); 
 
+    toDoItems.push(form.elements[0].value);
+
+//save list items in local storage
+    localStorage.setItem('listItem', JSON.stringify(toDoItems));
+
     form.elements[0].value = "";
-    
 });
 
+function getStorageItems() {
+  let storageItem = localStorage.getItem('listItem');
+  console.log("local storage: ", storageItem);
+}
+
 function createListItem(text) {
-  // create list element for unorder list
+  // create list element for unordered list
   let list = document.createElement("li");
   //create text to add to list item
   const textNode = document.createTextNode(text);
@@ -38,4 +51,6 @@ function deleteListItem(list) {
 
   return deleteButton;
   }
+
+
 }
