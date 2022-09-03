@@ -2,7 +2,9 @@ const form = document.getElementById("toDoEntry");
 
 let toDoItems = [];
 
-getStorageItems();
+if (localStorage.getItem('listItem')){
+  getStorageItems();
+}
 
 form.elements[1].addEventListener("click", function(click) {
    click.preventDefault();
@@ -21,7 +23,8 @@ form.elements[1].addEventListener("click", function(click) {
 
 function getStorageItems() {
   let storageItem = localStorage.getItem('listItem');
-  console.log("local storage: ", storageItem);
+  toDoItems = JSON.parse(storageItem);
+  console.log("Saved to-do items: ", toDoItems);
 }
 
 function createListItem(text) {
