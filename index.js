@@ -4,6 +4,16 @@ let toDoItems = [];
 
 if (localStorage.getItem('listItem')){
   getStorageItems();
+  printToDoItems();
+}
+
+function printToDoItems() {
+  let ulList = document.getElementById("todo-list");
+  
+  for (let i = 0; i < toDoItems.length; i++){
+    let li = createListItem(toDoItems[i]);
+    ulList.appendChild(li); 
+  }
 }
 
 form.elements[1].addEventListener("click", function(click) {
@@ -43,17 +53,12 @@ function createListItem(text) {
 
 function deleteListItem(list) {
   let deleteButton = document.createElement("button");
-
   let textNode = document.createTextNode("X");
-
   deleteButton.appendChild(document.createTextNode("X"));
-
   deleteButton.addEventListener("click", function() {
     list.remove()
   })
-
   return deleteButton;
   }
-
 
 }
