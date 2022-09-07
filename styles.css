@@ -9,3 +9,6 @@ body {
 ul {
   list-style-type: none;
 }
+.line {
+  text-decoration: line-through;
+}

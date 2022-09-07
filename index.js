@@ -2,7 +2,6 @@ const form = document.getElementById("toDoEntry");
 
 let toDoItems = [];
 
-
 if (localStorage.getItem('listItem')){
   getStorageItems();
   printToDoItems();
