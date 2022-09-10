@@ -2,6 +2,8 @@ const form = document.getElementById("toDoEntry");
 
 let toDoItems = [];
 
+// checks first for list items in local storage and sets the todo items array
+// prints to do items added to to do items list from getLocalStorage function
 if (localStorage.getItem('listItem')){
   getStorageItems();
   printToDoItems();
@@ -12,6 +14,12 @@ function printToDoItems() {
   
   for (let i = 0; i < toDoItems.length; i++){
     let li = createListItem(toDoItems[i].value);
+
+    if(toDoItems[i].finished) {
+      li.style.textDecoration = "line-through";
+      li.lastChild.checked = toDoItems[i].finished;
+    }
+      
     ulList.appendChild(li); 
   }
 }
@@ -45,8 +53,8 @@ form.elements[1].addEventListener("click", function(click) {
 
 function getStorageItems() {
   let storageItem = localStorage.getItem('listItem');
+  // parses/converts json array to javascript array
   toDoItems = JSON.parse(storageItem);
-  console.log("Saved to-do items: ", toDoItems);
 }
 
 function createListItem(text) {
@@ -59,12 +67,21 @@ function createListItem(text) {
   // get delete button
   let deleteButton = deleteListItem(list, text);
   // get checkbox
-  let checkBox = createCheckBox();
+  let checkBox = createCheckBox(list, text);
   // add delete button to list element
   list.appendChild(deleteButton);
   // add checkbox to list element
   list.appendChild(checkBox);
 // return the new list item to the event listener to add to the unordered list
+// for(let i = 0; i < toDoItems.length; i++ ) {
+//   if (toDoItems[i].finished)
+//   {
+//     list.style.textDecoration = "line-through";
+//   }
+//   else {
+//     list.style.textDecoration = "";
+//   }
+// }
   return list;
 
 function deleteListItem(list, node) {
@@ -85,9 +102,20 @@ function deleteListItem(list, node) {
   }
 }
 
-function createCheckBox() {
+function createCheckBox(list, text) {
   let inputElement = document.createElement("INPUT");
   inputElement.setAttribute("type", "checkbox");
+
+  inputElement.addEventListener("change", function(e) {
+    for(let i = 0; i < toDoItems.length; i++ ) {
+      if(toDoItems[i].value == text)
+      {
+        toDoItems[i].finished = !toDoItems[i].finished
+      }
+    }
+    
+    localStorage.setItem('listItem', JSON.stringify(toDoItems));
+  });
 
   return inputElement;
 }
