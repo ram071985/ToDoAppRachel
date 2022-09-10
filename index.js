@@ -16,6 +16,9 @@ function printToDoItems() {
   }
 }
 
+//checkbox/cross out items
+//function crossOutItems();
+
 form.elements[1].addEventListener("click", function(click) {
    click.preventDefault();
 
@@ -55,14 +58,18 @@ function createListItem(text) {
   list.appendChild(textNode);
   // get delete button
   let deleteButton = deleteListItem(list, text);
-  // add delete button to list item
+  // get checkbox
+  let checkBox = createCheckBox();
+  // add delete button to list element
   list.appendChild(deleteButton);
+  // add checkbox to list element
+  list.appendChild(checkBox);
 // return the new list item to the event listener to add to the unordered list
   return list;
 
 function deleteListItem(list, node) {
   let deleteButton = document.createElement("button");
-  let textNode = document.createTextNode("X");
+
   deleteButton.appendChild(document.createTextNode("X"));
   deleteButton.addEventListener("click", function() {
     list.remove()
@@ -72,11 +79,15 @@ function deleteListItem(list, node) {
         toDoItems.splice(i, 1);
       }
     }
-
       localStorage.setItem('listItem', JSON.stringify(toDoItems));
   })
-
     return deleteButton;
   }
+}
 
+function createCheckBox() {
+  let inputElement = document.createElement("INPUT");
+  inputElement.setAttribute("type", "checkbox");
+
+  return inputElement;
 }
