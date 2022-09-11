@@ -24,15 +24,14 @@ function printToDoItems() {
   }
 }
 
-//checkbox/cross out items
-//function crossOutItems();
-
 form.elements[1].addEventListener("click", function(click) {
    click.preventDefault();
 
     let ulList = document.getElementById("todo-list");
 
     let li = createListItem(form.elements[0].value);
+    
+
     ulList.appendChild(li);
 
 // create list item object to store in array
@@ -46,6 +45,7 @@ form.elements[1].addEventListener("click", function(click) {
 
 //save list items in local storage
     localStorage.setItem('listItem', JSON.stringify(toDoItems));
+
 // clear input value 
     form.elements[0].value = "";
 
@@ -60,28 +60,32 @@ function getStorageItems() {
 function createListItem(text) {
   // create list element for unordered list
   let list = document.createElement("li");
+
   //create text to add to list item
   const textNode = document.createTextNode(text);
   // add the text to the new list item
   list.appendChild(textNode);
   // get delete button
   let deleteButton = deleteListItem(list, text);
-  // get checkbox
-  let checkBox = createCheckBox(list, text);
   // add delete button to list element
   list.appendChild(deleteButton);
-  // add checkbox to list element
-  list.appendChild(checkBox);
-// return the new list item to the event listener to add to the unordered list
-// for(let i = 0; i < toDoItems.length; i++ ) {
-//   if (toDoItems[i].finished)
-//   {
-//     list.style.textDecoration = "line-through";
-//   }
-//   else {
-//     list.style.textDecoration = "";
-//   }
-// }
+
+  list.addEventListener("click", function(e) {
+      for(let i = 0; i < toDoItems.length; i++ ) {
+        if(toDoItems[i].value == e.target.textContent) {
+         toDoItems[i].finished = !toDoItems[i].finished
+        }
+        if(toDoItems[i].finished) {
+          e.target.style.textDecoration = "line-through"
+        }
+      }
+     
+    //  let strikeThrough = (e.target.style.textDecoration = "line-through");
+    //  if(e.target.textContent.length > 0) {
+    //   return strikeThrough;
+    //  }
+     localStorage.setItem('listItem', JSON.stringify(toDoItems));
+  });
   return list;
 
 function deleteListItem(list, node) {
@@ -100,22 +104,4 @@ function deleteListItem(list, node) {
   })
     return deleteButton;
   }
-}
-
-function createCheckBox(list, text) {
-  let inputElement = document.createElement("INPUT");
-  inputElement.setAttribute("type", "checkbox");
-
-  inputElement.addEventListener("change", function(e) {
-    for(let i = 0; i < toDoItems.length; i++ ) {
-      if(toDoItems[i].value == text)
-      {
-        toDoItems[i].finished = !toDoItems[i].finished
-      }
-    }
-    
-    localStorage.setItem('listItem', JSON.stringify(toDoItems));
-  });
-
-  return inputElement;
 }
