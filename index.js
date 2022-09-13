@@ -59,20 +59,20 @@ function getStorageItems() {
 
 function createListItem(text) {
   // create list element for unordered list
-  let list = document.createElement("li");
+  let listItem = document.createElement("li");
 
   //create text to add to list item
   const textNode = document.createTextNode(text);
   // add the text to the new list item
-  list.appendChild(textNode);
+  listItem.appendChild(textNode);
   // get delete button
-  let deleteButton = deleteListItem(list, text);
+  let deleteButton = deleteListItem(listItem, text);
   // add delete button to list element
-  list.appendChild(deleteButton);
+  listItem.appendChild(deleteButton);
 
-  list.addEventListener("click", function(e) {
+  listItem.addEventListener("click", function(e) {
       for(let i = 0; i < toDoItems.length; i++ ) {
-        if(toDoItems[i].value == e.target.textContent) {
+        if(toDoItems[i].value == text) {
          toDoItems[i].finished = !toDoItems[i].finished
         }
         if(toDoItems[i].finished) {
@@ -80,13 +80,13 @@ function createListItem(text) {
         }
       }
      
-    //  let strikeThrough = (e.target.style.textDecoration = "line-through");
-    //  if(e.target.textContent.length > 0) {
-    //   return strikeThrough;
-    //  }
+    let strikeThrough = (e.target.style.textDecoration = "line-through");
+    if(e.target.textContent.length > 0) {
+       return strikeThrough;
+      }
      localStorage.setItem('listItem', JSON.stringify(toDoItems));
   });
-  return list;
+  return listItem;
 
 function deleteListItem(list, node) {
   let deleteButton = document.createElement("button");

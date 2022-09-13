@@ -9,6 +9,6 @@ body {
 ul {
   list-style-type: none;
 }
-.line {
+.done {
   text-decoration: line-through;
 }
