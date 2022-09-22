@@ -8,12 +8,7 @@ function printToDoItems() {
   let ulList = document.getElementById("todo-list");
 
   for (let i = 0; i < toDoItems.length; i++) {
-    let li = createListItem(toDoItems[i].value);
-
-    if (toDoItems[i].finished) {
-      li.style.textDecoration = "line-through";
-      li.lastChild.checked = toDoItems[i].finished;
-    }
+    const li = createListItem(toDoItems[i].value);
 
     ulList.appendChild(li);
   }
@@ -71,7 +66,7 @@ function deleteListItem(list, node) {
 }
 
 if (localStorage.getItem("listItem")) {
-  getStorageItems();
+  toDoItems = getStorageItems();
   printToDoItems();
 }
 
@@ -85,6 +80,7 @@ formBtn.addEventListener("click", function (click) {
   ulList.appendChild(li);
 
   const todoItem = {
+    id: li.id,
     value: formInput.value,
     finished: false,
   };
