@@ -5,11 +5,12 @@ const ulList = document.getElementById("todo-list");
 let toDoItems = [];
 
 function printToDoItems() {
-  let ulList = document.getElementById("todo-list");
-
   for (let i = 0; i < toDoItems.length; i++) {
-    const li = createListItem(toDoItems[i].value);
-
+    const li = createListItem(
+      toDoItems[i].value,
+      toDoItems[i].id,
+      toDoItems[i].finished
+    );
     ulList.appendChild(li);
   }
 }
@@ -23,7 +24,7 @@ function getStorageItems() {
   return JSON.parse(storageItem);
 }
 
-function createListItem(text) {
+function createListItem(text, lineID = Math.random(), finished = false) {
   let listItem = document.createElement("li");
   const textNode = document.createTextNode(text);
   listItem.appendChild(textNode);
@@ -80,7 +81,7 @@ formBtn.addEventListener("click", function (click) {
   ulList.appendChild(li);
 
   const todoItem = {
-    id: li.id,
+    id: Math.random(),
     value: formInput.value,
     finished: false,
   };
