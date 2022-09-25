@@ -5,7 +5,7 @@ _A simple To-Do List Application created entirely in Javascript and HTML_
 
 View it [here](https://rmuchow95.github.io/ToDoApp/)
 
-![Screenshot Rachels To-Do List App](Images/ToDoApp.png)
+![Screenshot Rachels To-Do List App](Desktop/Projects/Images/ToDoApp.png)
 
 **Summary**
 
