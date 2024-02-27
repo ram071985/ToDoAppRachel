@@ -35,19 +35,20 @@ function createListItem(text) {
       if (toDoItems[i].value == text) {
         toDoItems[i].finished = !toDoItems[i].finished;
       }
-      if (toDoItems[i].finished) {
-        e.target.style.textDecoration = "line-through";
-      }
+      // if (toDoItems[i].finished) {
+      //   e.target.style.textDecoration = "line-through";
+      // }
     }
 
-    let strikeThrough = (e.target.style.textDecoration = "line-through");
-    if (e.target.textContent.length > 0) {
-      return strikeThrough;
-    }
+   // let strikeThrough = (e.target.style.textDecoration = "line-through");
+    // if (e.target.textContent.length > 0) {
+    //   return strikeThrough;
+    // }
     localStorage.setItem("listItem", JSON.stringify(toDoItems));
   });
   return listItem;
 }
+
 function deleteListItem(list, node) {
   let deleteButton = document.createElement("button");
 
@@ -75,7 +76,7 @@ formBtn.addEventListener("click", function (click) {
 
   let ulList = document.getElementById("todo-list");
 
-  let li = createListItem(form.elements[0].value);
+  let li = createListItem(formInput.value);
 
   ulList.appendChild(li);
 
